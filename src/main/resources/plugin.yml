@@ -5,3 +5,37 @@ api-version: 1.18
 authors: [ GreenJon902 ]
 description: Get colorful text in chat
 website: https://github.com/GreenJon902
+
+commands:
+  coloredChat:
+    description: Your description
+    usage: /<command> [[say|s]|[nick|n]|[toggleauto|ta]] [[flatColor|fc] {color}]|[rainbow|r]|[gradient|g] [{keyframe}...|{keyframe}{amountTillNextKeyFrame}...]]
+    permission: coloredChat
+permissions:
+  coloredChat:
+    default: op
+  coloredChat.rainbow:
+    default: true
+  coloredChat.gradient:
+    default: true
+  coloredChat.flatColor:
+    default: true
+
+
+  coloredChat.auto:
+    default: op
+  coloredChat.auto.rainbow:
+    default: true
+  coloredChat.auto.gradient:
+    default: true
+  coloredChat.auto.flatColor:
+    default: true
+
+    coloredChat.nick:
+      default: op
+    coloredChat.nick.rainbow:
+      default: true
+    coloredChat.nick.gradient:
+      default: true
+    coloredChat.nick.flatColor:
+      default: true
