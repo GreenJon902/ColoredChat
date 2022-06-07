@@ -9,7 +9,7 @@ website: https://github.com/GreenJon902
 commands:
   coloredChat:
     description: Your description
-    usage: /<command> [[say|s]|[nick|n]|[toggleauto|ta]] [[flatColor|fc] {color}]|[rainbow|r (spacing)]|[gradient|g] [{keyframe}...|{keyframe}{amountTillNextKeyFrame}...]]
+    usage: /<command> [[say|s]|[nick|n]|[toggleauto|ta]] [[flatcolor|fc] {color}]|[rainbow|r (spacing)]|[gradient|g] [{keyframe}...|{keyframe}{amountTillNextKeyFrame}...]]
     permission: coloredChat
 permissions:
   coloredChat:

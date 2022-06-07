@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ColoredChatCommands implements TabExecutor {
     List<String> firstArgSet = Arrays.asList("say", "nick", "toggleauto");
-    List<String> secondArgSet = Arrays.asList("flatColor", "rainbow", "gradient");
+    List<String> secondArgSet = Arrays.asList("flatcolor", "rainbow", "gradient");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
