@@ -2,6 +2,7 @@ package com.greenjon902.coloredchat;
 
 import com.greenjon902.utils.FilterList;
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -42,8 +43,6 @@ public class ColoredChatCommands implements TabExecutor {
                     case "flatcolor":
                     case "rainbow":
                         return FilterList.filterListByStart(thirdArgSetA, args[2]);
-                    default:
-                        throw new NotImplementedException();
                 }
             case 4:
                 colorMode = args[1];
@@ -52,9 +51,28 @@ public class ColoredChatCommands implements TabExecutor {
                         return null;
                     case "rainbow":
                         return FilterList.filterListByStart(thirdArgSetB, args[2]);
-                    default:
-                        throw new NotImplementedException();
                 }
+        }
+
+        if (length >= 2) {
+            if (args[1].equals("gradient")) {
+                if (args.length == 3) { //cant do next thing while length is 0
+                    return FilterList.filterListByStart(new ArrayList<String>(thirdArgSetA) {{
+                        addAll(thirdArgSetB); //merge lists
+                    }}, args[args.length - 1]);
+                }
+
+                 if (args[3].startsWith("#")) { // all args are colors
+                    return FilterList.filterListByStart(thirdArgSetA, args[args.length - 1]);
+
+                 } else { // not all args are colors
+                     if ((length % 2) == 0) { //if event return distances
+                         return FilterList.filterListByStart(thirdArgSetB, args[args.length - 1]);
+                     } else {
+                         return FilterList.filterListByStart(thirdArgSetA, args[args.length - 1]);
+                     }
+                 }
+            }
         }
 
         return null;
