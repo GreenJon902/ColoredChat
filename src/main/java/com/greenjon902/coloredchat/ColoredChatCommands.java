@@ -1,6 +1,7 @@
 package com.greenjon902.coloredchat;
 
 import com.greenjon902.utils.FilterList;
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class ColoredChatCommands implements TabExecutor {
     List<String> firstArgSet = Arrays.asList("say", "nick", "toggleauto");
@@ -25,6 +27,7 @@ public class ColoredChatCommands implements TabExecutor {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         int length = args.length;
+        String colorMode;
 
         switch (length) {
             case 1: //say, nick, toggleauto
@@ -34,14 +37,23 @@ public class ColoredChatCommands implements TabExecutor {
                 return FilterList.filterListByStart(secondArgSet, args[1]);
 
             case 3:
-                String colorMode = args[1];
+                colorMode = args[1];
                 switch (colorMode) {
                     case "flatcolor":
-                        return FilterList.filterListByStart(thirdArgSetA, args[2]);
                     case "rainbow":
-                        if (length == 4) {
-                            return FilterList.filterListByStart(thirdArgSetB, args[2]);
-                        }
+                        return FilterList.filterListByStart(thirdArgSetA, args[2]);
+                    default:
+                        throw new NotImplementedException();
+                }
+            case 4:
+                colorMode = args[1];
+                switch (colorMode) {
+                    case "flatcolor":
+                        return null;
+                    case "rainbow":
+                        return FilterList.filterListByStart(thirdArgSetB, args[2]);
+                    default:
+                        throw new NotImplementedException();
                 }
         }
 
