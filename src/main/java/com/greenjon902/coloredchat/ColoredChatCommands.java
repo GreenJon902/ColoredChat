@@ -146,7 +146,7 @@ public class ColoredChatCommands implements TabExecutor {
         String colorMode;
 
         switch (length) {
-            case 1: //say, nick, toggleauto
+            case 1: //nick, chat
                 return FilterList.filterListByStart(firstArgSet, args[0]);
 
             case 2: //flatcolor, rainbow, gradient
