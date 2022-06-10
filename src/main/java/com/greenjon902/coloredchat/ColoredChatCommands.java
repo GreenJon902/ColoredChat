@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ColoredChatCommands implements TabExecutor {
-    List<String> firstArgSet = Arrays.asList("say", "nick", "toggleauto");
+    List<String> firstArgSet = Arrays.asList("nick", "chat");
     List<String> secondArgSet = Arrays.asList("flatcolor", "rainbow", "gradient");
     List<String> thirdArgSetA = Arrays.asList("#000000", "#111111", "#222222", "#333333", "#444444", "#555555", "#666666", "#777777", "#888888", "#999999", "#aaaaaa","#bbbbbb", "#cccccc", "#dddddd", "#eeeeee", "#ffffff");
     List<String> thirdArgSetB = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
@@ -48,7 +48,7 @@ public class ColoredChatCommands implements TabExecutor {
         switch (colorMode) {
             case "flatcolor":
                 if (args.length != 3) {
-                    sender.sendMessage(ChatColor.RED + "/coloredchat ... flatcolor takes 3 arguments");
+                    sender.sendMessage(ChatColor.RED + "/chat ... flatcolor takes 3 arguments");
                     return true;
                 }
                 sColor = args[2];
@@ -67,7 +67,7 @@ public class ColoredChatCommands implements TabExecutor {
                 break;
             case "rainbow":
                 if (!(args.length == 2 || args.length == 3)) {
-                    sender.sendMessage(ChatColor.RED + "/coloredchat ... rainbow takes 2 or 3 arguments");
+                    sender.sendMessage(ChatColor.RED + "/chat ... rainbow takes 2 or 3 arguments");
                     return true;
                 }
                 if (args.length == 2) {
@@ -85,7 +85,7 @@ public class ColoredChatCommands implements TabExecutor {
                 break;
             case "gradient":
                 if (!(args.length >= 3)) {
-                    sender.sendMessage(ChatColor.RED + "/coloredchat ... gradient takes 3 or more arguments");
+                    sender.sendMessage(ChatColor.RED + "/chat ... gradient takes 3 or more arguments");
                     return true;
                 }
                 if (args.length == 3 || args[3].startsWith("#")) { // all args are colors
@@ -107,7 +107,7 @@ public class ColoredChatCommands implements TabExecutor {
                     colorer = new GradientColorer(colors);
                 } else { // not all args are colors
                     if ((args.length % 2) == 1) {
-                        sender.sendMessage(ChatColor.RED + "/coloredchat ... gradient takes an even number of args");
+                        sender.sendMessage(ChatColor.RED + "/chat ... gradient takes an even number of args");
                         return true;
                     }
                     

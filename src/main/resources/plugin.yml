@@ -7,18 +7,18 @@ description: Get colorful text in chat
 website: https://github.com/GreenJon902
 
 commands:
-  coloredChat:
-    description: Your description
-    usage: /<command> [[say|s]|[nick|n]|[toggleauto|ta]] [[flatcolor|fc] {color}]|[rainbow|r (resolution)]|[gradient|g] [{keycolor}...|{keycolor}{amountTillNextKeyColor}...]]
-    permission: coloredChat
+  color:
+    description: Color a certain thing
+    usage: /<command> [[nick|n]|[chat|c]] [[flatcolor|fc] {color}]|[rainbow|r (resolution)]|[gradient|g] [{keycolor}...|{keycolor}{amountTillNextKeyColor}...]]
+    permission: color
 permissions:
-  coloredChat:
+  color:
     default: op
-  coloredChat.rainbow:
+  color.rainbow:
     default: true
-  coloredChat.gradient:
+  color.gradient:
     default: true
-  coloredChat.flatColor:
+  color.flatColor:
     default: true
 
 
