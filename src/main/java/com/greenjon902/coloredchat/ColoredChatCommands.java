@@ -5,7 +5,6 @@ import com.greenjon902.coloredchat.colorers.FlatColorer;
 import com.greenjon902.coloredchat.colorers.GradientColorer;
 import com.greenjon902.coloredchat.colorers.RainbowColorer;
 import com.greenjon902.utils.FilterList;
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
@@ -17,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public class ColoredChatCommands implements TabExecutor {
     List<String> firstArgSet = Arrays.asList("say", "nick", "toggleauto");
