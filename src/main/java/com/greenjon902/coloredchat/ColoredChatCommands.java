@@ -56,7 +56,12 @@ public class ColoredChatCommands implements TabExecutor {
                     sender.sendMessage(Color.RED + "Color has to start with with #");
                     return true;
                 }
-                iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
+                try {
+                    iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
+                } catch (NumberFormatException e) {
+                    sender.sendMessage(Color.RED + "Color can only contain characters 1,2,3,4,5,6,7,8,9,a,b,c,d,e,f");
+                    return true;
+                }
                 colorer = new FlatColorer(Color.fromRGB(iColor));
             case "rainbow":
                 if (!(args.length == 2 || args.length == 3)) {
@@ -66,7 +71,13 @@ public class ColoredChatCommands implements TabExecutor {
                 if (args.length == 2) {
                     colorer = new RainbowColorer();
                 } else {
-                    int resolution = Integer.parseInt(args[2]);
+                    int resolution;
+                    try {
+                        resolution = Integer.parseInt(args[2]);
+                    } catch (NumberFormatException e) {
+                        sender.sendMessage(Color.RED + "Invalid number - \"" + args[2] + "\"");
+                        return true;
+                    }
                     colorer = new RainbowColorer(resolution);
                 }
             case "gradient":
@@ -86,7 +97,12 @@ public class ColoredChatCommands implements TabExecutor {
                             sender.sendMessage(Color.RED + "Color has to start with with #");
                             return true;
                         }
-                        iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
+                        try {
+                            iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
+                        } catch (NumberFormatException e) {
+                            sender.sendMessage(Color.RED + "Color can only contain characters 1,2,3,4,5,6,7,8,9,a,b,c,d,e,f");
+                            return true;
+                        }
                         colors[i-2] = Color.fromRGB(iColor);
                     }
                     colorer = new GradientColorer(colors);
@@ -98,8 +114,19 @@ public class ColoredChatCommands implements TabExecutor {
                             sender.sendMessage(Color.RED + "Color has to start with with #");
                             return true;
                         }
-                        iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
-                        int amount = Integer.parseInt(args[i+1]);
+                        try {
+                            iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
+                        } catch (NumberFormatException e) {
+                            sender.sendMessage(Color.RED + "Color can only contain characters 1,2,3,4,5,6,7,8,9,a,b,c,d,e,f");
+                            return true;
+                        }
+                        int amount;
+                        try {
+                            amount = Integer.parseInt(args[i+1]);
+                        } catch (NumberFormatException e) {
+                            sender.sendMessage(Color.RED + "Invalid number - \"" + args[i+1] + "\"");
+                            return true;
+                        }
                         colorsAndAmounts[i-2] = new GradientColorer.ColorAndAmount(Color.fromRGB(iColor), amount);
                     }
                     colorer = new GradientColorer(colorsAndAmounts);
