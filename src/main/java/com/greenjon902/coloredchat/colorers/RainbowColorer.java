@@ -1,16 +1,18 @@
 package com.greenjon902.coloredchat.colorers;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Color;
 
 public class RainbowColorer implements Colorer {
-    private static final Color[] colors = new Color[] {
-            Color.fromRGB(0xFF0000),
-            Color.fromRGB(0xFF7F00),
-            Color.fromRGB(0xFFFF00),
-            Color.fromRGB(0x00FF00),
-            Color.fromRGB(0x0000FF),
-            Color.fromRGB(0x4B0082),
-            Color.fromRGB(0x9400D3)
+    private static final TextColor[] colors = new TextColor[] {
+            TextColor.color(0xFF0000),
+            TextColor.color(0xFF7F00),
+            TextColor.color(0xFFFF00),
+            TextColor.color(0x00FF00),
+            TextColor.color(0x0000FF),
+            TextColor.color(0x4B0082),
+            TextColor.color(0x9400D3)
     };
 
     private GradientColorer gradientColorer;
@@ -42,7 +44,7 @@ public class RainbowColorer implements Colorer {
     }
 
     @Override
-    public String color(String string) {
-        return gradientColorer.color(string);
+    public Component colorString(String string) {
+        return gradientColorer.colorString(string);
     }
 }

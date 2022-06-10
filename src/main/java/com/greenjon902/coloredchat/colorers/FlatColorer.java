@@ -1,22 +1,24 @@
 package com.greenjon902.coloredchat.colorers;
 
-import org.bukkit.Color;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 
 public class FlatColorer implements Colorer {
-    private Color color;
-    public Color getColor() {
+    private TextColor color;
+    public TextColor getColor() {
         return color;
     }
-    public void setColor(Color color) {
+    public void setColor(TextColor color) {
         this.color = color;
     }
 
-    public FlatColorer(Color color) {
+    public FlatColorer(TextColor color) {
         this.color = color;
     }
 
     @Override
-    public String color(String string) {
-        return color + string;
+    public Component colorString(String string) {
+        return Component.text(string)
+                .color(color);
     }
 }

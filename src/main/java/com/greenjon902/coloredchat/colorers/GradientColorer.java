@@ -1,19 +1,24 @@
 package com.greenjon902.coloredchat.colorers;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Color;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class GradientColorer implements Colorer {
-    private Color[] colors;
+    private TextColor[] colors;
     private int[] amounts; // Fit colors to string if null
 
     //TODO: GETTERS AND SETTERS FOR COLORS AND AMOUNTS
 
-    public GradientColorer(Color... colors) {
+    public GradientColorer(TextColor... colors) {
         this.colors = colors;
     }
 
     public GradientColorer(ColorAndAmount... colorsAndAmounts) {
-        colors = new Color[colorsAndAmounts.length];
+        colors = new TextColor[colorsAndAmounts.length];
         amounts = new int[colorsAndAmounts.length];
 
         for (int i=0; i<colorsAndAmounts.length; i++) {
@@ -28,11 +33,11 @@ public class GradientColorer implements Colorer {
     }
 
     public static class ColorAndAmount {
-        private Color color;
-        public Color getColor() {
+        private TextColor color;
+        public TextColor getColor() {
             return color;
         }
-        public void setColor(Color color) {
+        public void setColor(TextColor color) {
             this.color = color;
         }
 
@@ -44,7 +49,7 @@ public class GradientColorer implements Colorer {
             this.amount = amount;
         }
 
-        public ColorAndAmount(Color color, int amount) {
+        public ColorAndAmount(TextColor color, int amount) {
             this.color = color;
             this.amount = amount;
         }

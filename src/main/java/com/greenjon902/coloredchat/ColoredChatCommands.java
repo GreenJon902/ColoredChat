@@ -5,6 +5,7 @@ import com.greenjon902.coloredchat.colorers.FlatColorer;
 import com.greenjon902.coloredchat.colorers.GradientColorer;
 import com.greenjon902.coloredchat.colorers.RainbowColorer;
 import com.greenjon902.utils.FilterList;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
@@ -62,7 +63,7 @@ public class ColoredChatCommands implements TabExecutor {
                     sender.sendMessage(ChatColor.RED + "Color can only contain characters 1,2,3,4,5,6,7,8,9,a,b,c,d,e,f");
                     return true;
                 }
-                colorer = new FlatColorer(Color.fromRGB(iColor));
+                colorer = new FlatColorer(TextColor.color(iColor));
                 break;
             case "rainbow":
                 if (!(args.length == 2 || args.length == 3)) {
@@ -88,7 +89,7 @@ public class ColoredChatCommands implements TabExecutor {
                     return true;
                 }
                 if (args.length == 3 || args[3].startsWith("#")) { // all args are colors
-                    Color[] colors = new Color[args.length-2];
+                    TextColor[] colors = new TextColor[args.length-2];
                     for (int i=2; i<args.length; i++) {
                         sColor = args[i];
                         if (!sColor.startsWith("#")) {
@@ -101,7 +102,7 @@ public class ColoredChatCommands implements TabExecutor {
                             sender.sendMessage(ChatColor.RED + "Color can only contain characters 1,2,3,4,5,6,7,8,9,a,b,c,d,e,f");
                             return true;
                         }
-                        colors[i-2] = Color.fromRGB(iColor);
+                        colors[i-2] = TextColor.color(iColor);
                     }
                     colorer = new GradientColorer(colors);
                 } else { // not all args are colors
@@ -130,7 +131,7 @@ public class ColoredChatCommands implements TabExecutor {
                             sender.sendMessage(ChatColor.RED + "Invalid number - \"" + args[i+1] + "\"");
                             return true;
                         }
-                        colorsAndAmounts[i-2] = new GradientColorer.ColorAndAmount(Color.fromRGB(iColor), amount);
+                        colorsAndAmounts[i-2] = new GradientColorer.ColorAndAmount(TextColor.color(iColor), amount);
                     }
                     colorer = new GradientColorer(colorsAndAmounts);
                 }

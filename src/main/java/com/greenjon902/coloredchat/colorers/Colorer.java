@@ -1,5 +1,7 @@
 package com.greenjon902.coloredchat.colorers;
 
+import net.kyori.adventure.text.Component;
+
 public interface Colorer {
-    String color(String string);
+    Component colorString(String string);
 }
