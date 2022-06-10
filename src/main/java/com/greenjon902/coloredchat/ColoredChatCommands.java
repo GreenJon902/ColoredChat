@@ -22,7 +22,41 @@ public class ColoredChatCommands implements TabExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        return false;
+        if (!(args.length > 1)) {
+            sender.sendMessage(Color.RED + "Not enough arguments, takes at least 2");
+            return true;
+        }
+        String useCase = args[0];
+        String colorMode = args[1];
+
+        if (!firstArgSet.contains(useCase)) {
+            sender.sendMessage(Color.RED + "First argument must be on of these - " + firstArgSet);
+            return true;
+        }
+        if (!secondArgSet.contains(colorMode)) {
+            sender.sendMessage(Color.RED + "Second argument must be on of these - " + secondArgSet);
+            return true;
+        }
+
+        switch (colorMode) {
+            case "flatcolor":
+                if (args.length != 3) {
+                    sender.sendMessage(Color.RED + "/coloredchat ... flatcolor takes 3 arguments");
+                    return true;
+                }
+            case "rainbow":
+                if (!(args.length == 2 || args.length == 3)) {
+                    sender.sendMessage(Color.RED + "/coloredchat ... rainbow takes 2 or 3 arguments");
+                    return true;
+                }
+            case "gradient":
+                if (!(args.length >= 3)) {
+                    sender.sendMessage(Color.RED + "/coloredchat ... gradient takes 3 or more arguments");
+                    return true;
+                }
+        }
+
+        return true;
     }
 
     @Override
