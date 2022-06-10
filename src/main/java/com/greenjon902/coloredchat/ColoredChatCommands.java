@@ -1,5 +1,9 @@
 package com.greenjon902.coloredchat;
 
+import com.greenjon902.coloredchat.colorers.Colorer;
+import com.greenjon902.coloredchat.colorers.FlatColorer;
+import com.greenjon902.coloredchat.colorers.GradientColorer;
+import com.greenjon902.coloredchat.colorers.RainbowColorer;
 import com.greenjon902.utils.FilterList;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Color;
@@ -28,6 +32,7 @@ public class ColoredChatCommands implements TabExecutor {
         }
         String useCase = args[0];
         String colorMode = args[1];
+        Colorer colorer;
 
         if (!firstArgSet.contains(useCase)) {
             sender.sendMessage(Color.RED + "First argument must be on of these - " + firstArgSet);
@@ -38,21 +43,66 @@ public class ColoredChatCommands implements TabExecutor {
             return true;
         }
 
+        String sColor;
+        int iColor;
         switch (colorMode) {
             case "flatcolor":
                 if (args.length != 3) {
                     sender.sendMessage(Color.RED + "/coloredchat ... flatcolor takes 3 arguments");
                     return true;
                 }
+                sColor = args[2];
+                if (!sColor.startsWith("#")) {
+                    sender.sendMessage(Color.RED + "Color has to start with with #");
+                    return true;
+                }
+                iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
+                colorer = new FlatColorer(Color.fromRGB(iColor));
             case "rainbow":
                 if (!(args.length == 2 || args.length == 3)) {
                     sender.sendMessage(Color.RED + "/coloredchat ... rainbow takes 2 or 3 arguments");
                     return true;
                 }
+                if (args.length == 2) {
+                    colorer = new RainbowColorer();
+                } else {
+                    int resolution = Integer.parseInt(args[2]);
+                    colorer = new RainbowColorer(resolution);
+                }
             case "gradient":
                 if (!(args.length >= 3)) {
                     sender.sendMessage(Color.RED + "/coloredchat ... gradient takes 3 or more arguments");
                     return true;
+                }
+                if ((args.length % 2) == 1) {
+                    sender.sendMessage(Color.RED + "/coloredchat ... gradient takes an even number of args");
+                    return true;
+                }
+                if (args[3].startsWith("#")) { // all args are colors
+                    Color[] colors = new Color[args.length-2];
+                    for (int i=2; i<args.length; i++) {
+                        sColor = args[i];
+                        if (!sColor.startsWith("#")) {
+                            sender.sendMessage(Color.RED + "Color has to start with with #");
+                            return true;
+                        }
+                        iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
+                        colors[i-2] = Color.fromRGB(iColor);
+                    }
+                    colorer = new GradientColorer(colors);
+                } else { // not all args are colors
+                    GradientColorer.ColorAndAmount[] colorsAndAmounts = new GradientColorer.ColorAndAmount[args.length-2];
+                    for (int i=2; i<args.length; i+=2) {
+                        sColor = args[i];
+                        if (!sColor.startsWith("#")) {
+                            sender.sendMessage(Color.RED + "Color has to start with with #");
+                            return true;
+                        }
+                        iColor = Integer.parseInt(sColor.replaceFirst("#", ""), 16);
+                        int amount = Integer.parseInt(args[i+1]);
+                        colorsAndAmounts[i-2] = new GradientColorer.ColorAndAmount(Color.fromRGB(iColor), amount);
+                    }
+                    colorer = new GradientColorer(colorsAndAmounts);
                 }
         }
 
