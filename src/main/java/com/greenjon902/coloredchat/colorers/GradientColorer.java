@@ -28,8 +28,37 @@ public class GradientColorer implements Colorer {
     }
 
     @Override
-    public String color(String string) {
-        return null;
+    public Component colorString(String string) {
+        int[] amounts = this.amounts;
+        if (amounts == null) {
+            amounts = new int[colors.length];
+            Arrays.fill(amounts, (int) Math.ceil((double) string.length() / (double) (colors.length - 1)));
+        }
+
+        ArrayList<TextColor> interpolatedColors = new ArrayList<>();
+        for (int i=0; i<colors.length-1; i++) {
+            TextColor startColor = colors[i];
+            TextColor endColor = colors[i+1];
+            int amountToFill = amounts[i];
+
+            for (int n=0; n<amountToFill; n++) {
+                interpolatedColors.add(
+                        TextColor.color(
+                                startColor.red() + ((endColor.red() - startColor.red()) * n),
+                                startColor.green() + ((endColor.green() - startColor.green()) * n),
+                                    startColor.blue() + ((endColor.blue() - startColor.blue()) * n)
+                        )
+                );
+            }
+        }
+
+        Component newString = Component.empty();
+        for (int i=0; i<string.length(); i++) {
+            newString.append(Component.text(string.charAt(i))
+                    .color(interpolatedColors.get(i)));
+        }
+
+        return newString;
     }
 
     public static class ColorAndAmount {
