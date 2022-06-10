@@ -15,16 +15,30 @@ public class RainbowColorer implements Colorer {
 
     private GradientColorer gradientColorer;
 
+    private int resolution;
+    public void setResolution(int resolution) {
+        this.resolution = resolution;
+        updateWithResolution();
+    }
+    public int getResolution() {
+        return resolution;
+    }
+
     public RainbowColorer(int resolution) {
+        this.resolution = resolution;
+        updateWithResolution();
+    }
+
+    public RainbowColorer() {
+        gradientColorer = new GradientColorer(colors);
+    }
+
+    private void updateWithResolution() {
         GradientColorer.ColorAndAmount[] colorsAndAmounts = new GradientColorer.ColorAndAmount[colors.length];
         for (int i=0; i<colorsAndAmounts.length; i++) {
             colorsAndAmounts[i] = new GradientColorer.ColorAndAmount(colors[i], resolution);
         }
         gradientColorer = new GradientColorer(colorsAndAmounts);
-    }
-
-    public RainbowColorer() {
-        gradientColorer = new GradientColorer(colors);
     }
 
     @Override
